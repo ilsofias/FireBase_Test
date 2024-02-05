@@ -3,6 +3,7 @@ package com.example.firebasetest;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 
 public class RegisterAcc extends AppCompatActivity {
 private EditText name, email, bday, age;
-private Button register;
+private Button register, seeList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,16 @@ private Button register;
         bday = findViewById(R.id.b_day);
         age = findViewById(R.id.age);
         register = findViewById(R.id.register);
+        seeList = findViewById(R.id.seeList);
 
+
+        seeList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterAcc.this, ClientList.class);
+                startActivity(intent);
+            }
+        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +62,8 @@ private Button register;
         HashMap<String, Object> regHashmap = new HashMap<>();
         regHashmap.put("f_name", f_name);
         regHashmap.put("f_email", f_email);
-        regHashmap.put("f_age", f_bday);
-        regHashmap.put("f_bday", f_age);
+        regHashmap.put("f_age", f_age);
+        regHashmap.put("f_bday", f_bday);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference regRef = database.getReference("clients");
 
