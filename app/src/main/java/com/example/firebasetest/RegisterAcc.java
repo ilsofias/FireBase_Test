@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,10 +52,13 @@ private Button register, seeList;
 
                 if (f_name.isEmpty()||f_age.isEmpty()||f_email.isEmpty()||f_bday.isEmpty())
                 {
-                    Toast.makeText(RegisterAcc.this, "Please fill out ALL information", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
                 addToDataBase(f_name, f_email, f_bday, f_age);
+                c_toast();
+
+
             }
         });
     }
@@ -73,12 +79,22 @@ private Button register, seeList;
         regRef.child(key).setValue(regHashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(RegisterAcc.this, "Added as User", Toast.LENGTH_SHORT).show();
                 name.getText().clear();
                 age.getText().clear();
                 bday.getText().clear();
                 email.getText().clear();
             }
         });
+    }
+
+    private void c_toast()
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout= inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.customToast) );
+        final Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }
