@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="sageGreen">#ADBC9F</color>
     <color name="cream">#FBFADA</color>
-
+    <color name="darkGreen">#436850</color>
+    <color name="pastelGreen">#99BC85</color>
 </resources>
